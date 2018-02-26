@@ -9,6 +9,7 @@ import axios from 'axios';
 import './App.css';
 import SearchForm from './Components/SearchForm';
 import PicList from './Components/PicList';
+import Header from './Components/Header';
 
 // App components
 import apiKey from './config.js';
@@ -43,14 +44,18 @@ export default class App extends Component {
   render() {
     console.log(this.state.flickr);
     return (
-      <div className="container">
-        <SearchForm onSearch={this.performSearch} />
-        {
-          (this.state.loading)
-          ? <p>Loading...</p>
-          : <PicList data={this.state.flickr} />
-        }
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <SearchForm onSearch={this.performSearch} />
+          <Header />
+          {
+            (this.state.loading)
+            ? <p>Loading...</p>
+            : <PicList data={this.state.flickr} />
+          }
+        </div>
+      </BrowserRouter>
+      
     );
   }
 }

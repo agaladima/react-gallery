@@ -2,9 +2,13 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 const Header = () => (
-	<header>
-
-	</header>
+	<nav className="main-nav">
+        <ul>
+          <li><a href=''>Cats</a></li>
+          <li><a href=''>Dogs</a></li>
+          <li><a href=''>Computers</a></li>
+        </ul>
+  	</nav>
 );
 
 export default Header;
