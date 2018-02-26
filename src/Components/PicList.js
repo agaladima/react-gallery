@@ -1,12 +1,17 @@
 import React from 'react';
 import Pic from './Pic';
+import NoPics from './NoPics';
 
 const PicList = props => {
 
-	const results = props.photo;
-	let pics = results.map(pic =>
-		<Pic url={pic.images.fixed_height.url} />
-	);
+	const results = props.data;
+	let pics;
+	if(results.length > 0) {
+		pics = results.map(pic => <Pic url={pic.url_o} key={pic.id} />);
+	} else {
+		pics = <NoPics />
+	}
+	
 
 	return(
 		<div className='photo-container'>

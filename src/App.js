@@ -18,22 +18,22 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      flickr: []
+      flickr: [],
+      loading: true
     };
   }
 
   componentDidMount() {
-    // fetch(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=sunsets&per_page=25&format=json&nojsoncallback=1`)
-    // .then(response => response.json())
-    // .then(responseData => {
-    //   this.setState({ flickr: responseData.photos.photo });
-    // })
-    // .catch(error => {
-    //   console.log('Error fetching and parsing data', error);
-    // });
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=sunsets&per_page=25&format=json&nojsoncallback=1`)
+    this.performSearch();
+  }
+
+  performSearch = (query = 'baskeball') => {
+    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&extras=url_o&per_page=25&format=json&nojsoncallback=1`)
       .then(response => {
-        this.setState({ flickr: response.data.photos.photo });
+        this.setState({
+          flickr: response.data.photos.photo,
+          loading: false
+        });
       })
       .catch(error => {
         console.log('Error fetching and parsing data', error);
@@ -44,8 +44,12 @@ export default class App extends Component {
     console.log(this.state.flickr);
     return (
       <div className="container">
-        <SearchForm />
-        <PicList data={this.state.flickr} />
+        <SearchForm onSearch={this.performSearch} />
+        {
+          (this.state.loading)
+          ? <p>Loading...</p>
+          : <PicList data={this.state.flickr} />
+        }
       </div>
     );
   }
