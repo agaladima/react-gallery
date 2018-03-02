@@ -12,6 +12,10 @@ import './App.css';
 import SearchForm from './Components/SearchForm';
 import PicList from './Components/PicList';
 import Header from './Components/Header';
+import NoPics from './Components/NoPics';
+import Cats from './Components/Cats';
+import Dogs from './Components/Dogs';
+import Computers from './Components/Computers';
 
 // App components
 import apiKey from './config.js';
@@ -22,7 +26,8 @@ export default class App extends Component {
     super();
     this.state = {
       flickr: [],
-      loading: true
+      loading: true,
+      searchTerm: ''
     };
   }
 
@@ -35,7 +40,8 @@ export default class App extends Component {
       .then(response => {
         this.setState({
           flickr: response.data.photos.photo,
-          loading: false
+          loading: false,
+          searchTerm: query
         });
       })
       .catch(error => {
@@ -50,14 +56,14 @@ export default class App extends Component {
         <div className="container">
           <SearchForm onSearch={this.performSearch} />
           <Header />
-          {
-            (this.state.loading)
-            ? <p>Loading...</p>
-            : <PicList data={this.state.flickr} />
-          }
+          <PicList data={this.state.query} />
+          <Switch>	
+          	<Route path='/cats' component={Cats} />
+          	<Route path='/dogs' component={Dogs} />
+          	<Route path='/computers' component={Computers} />
+          </Switch>
         </div>
       </BrowserRouter>
-      
     );
   }
 }
