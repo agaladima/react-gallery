@@ -7,6 +7,8 @@ import {
 import 'whatwg-fetch';
 import axios from 'axios';
 import './App.css';
+
+// App components
 import SearchForm from './Components/SearchForm';
 import PicList from './Components/PicList';
 import Header from './Components/Header';
@@ -59,5 +61,3 @@ export default class App extends Component {
     );
   }
 }
-
-

@@ -19,7 +19,7 @@ export default class SearchForm extends Component {
   render() {  
     return (
       <form className="search-form" onSubmit={this.handleSubmit} >
-        <label className="is-hidden" htmlFor="search">Search</label>
+        <label className="is-hidden" htmlFor="search"></label>
         <input type="search" 
                onChange={this.onSearchChange}
                name="search" 
