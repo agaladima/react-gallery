@@ -1,18 +1,8 @@
 import React from 'react';
-import Pic from './Pic';
+import PicContainer from './PicContainer';
 
-
-const Computers = props => {
-
-
-	return(
-		<div className='photo-container'>
-			<h2>Computers Pictures</h2>
-			<ul>
-				Hello
-			</ul>
-		</div>
-	);
-};
+const Computers = props => (
+  <PicContainer title='Computers!' topic='computers' />
+)
 
 export default Computers;

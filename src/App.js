@@ -2,68 +2,46 @@ import React, { Component } from 'react';
 import {
   BrowserRouter,
   Route,
-  Switch
+  Switch,
+  Redirect
 } from 'react-router-dom';
 import 'whatwg-fetch';
-import axios from 'axios';
 import './App.css';
 
 // App components
 import SearchForm from './Components/SearchForm';
-import PicList from './Components/PicList';
+import SearchResults from './Components/SearchForm';
 import Header from './Components/Header';
+import Home from './Components/Home';
 import NoPics from './Components/NoPics';
 import Cats from './Components/Cats';
 import Dogs from './Components/Dogs';
 import Computers from './Components/Computers';
+import PicContainer from './Components/PicContainer';
+import PicList from './Components/PicList';
 
-// App components
-import apiKey from './config.js';
+class App extends Component {
 
-export default class App extends Component {
 
-  constructor() {
-    super();
-    this.state = {
-      flickr: [],
-      loading: true,
-      searchTerm: ''
-    };
-  }
-
-  componentDidMount() {
-    this.performSearch();
-  }
-
-  performSearch = (query = 'baskeball') => {
-    axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${query}&extras=url_o&per_page=25&format=json&nojsoncallback=1`)
-      .then(response => {
-        this.setState({
-          flickr: response.data.photos.photo,
-          loading: false,
-          searchTerm: query
-        });
-      })
-      .catch(error => {
-        console.log('Error fetching and parsing data', error);
-      });
-  }
 
   render() {
-    console.log(this.state.flickr);
     return (
       <BrowserRouter>
         <div className="container">
-          <SearchForm onSearch={this.performSearch} />
           <Header />
-          <PicList data={this.state.query} />
           <Switch>	
-          	<Route path='/cats' component={Cats} />
-          	<Route path='/dogs' component={Dogs} />
-          	<Route path='/computers' component={Computers} />
+          	<Route exact path='/' render={ ()=> <Redirect to={"/search"} /> } />
+            <Route exact path='/search' component={SearchForm} />
+            <Route path='/cats' component={Cats} />
+            <Route path='/dogs' component={Dogs} />
+            <Route path='/computers' component={Computers} />
+            <Route path='search/:topic' component={SearchResults} />
+            <PicContainer data={SearchResults} />
           </Switch>
         </div>
       </BrowserRouter>
     );
   }
 }
+
+export default App;

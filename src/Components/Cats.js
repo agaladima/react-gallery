@@ -1,10 +1,8 @@
 import React from 'react';
-import PicList from './PicList';
+import PicContainer from './PicContainer';
 
-const Cats = (
-	<PicList data={'Cats'}/>
-);
-
-	
+const Cats = props => (
+  <PicContainer title='Cats!' topic='cats' />
+)
 
 export default Cats;
