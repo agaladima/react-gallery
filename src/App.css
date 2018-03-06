@@ -78,8 +78,8 @@ input {
 .photo-container .not-found {
   width: 100%;
 }
-.no-pics {
-  text-align: center;
+.not-found img {
+  height: 100%;
 }
 
 @media only screen and (max-width: 767px)  {

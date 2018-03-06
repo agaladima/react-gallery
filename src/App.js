@@ -10,7 +10,7 @@ import './App.css';
 
 // App components
 import SearchForm from './Components/SearchForm';
-import SearchResults from './Components/SearchForm';
+import SearchResults from './Components/SearchResults';
 import Header from './Components/Header';
 import Home from './Components/Home';
 import NoPics from './Components/NoPics';
@@ -30,13 +30,12 @@ class App extends Component {
         <div className="container">
           <Header />
           <Switch>	
-          	<Route exact path='/' render={ ()=> <Redirect to={"/search"} /> } />
-            <Route exact path='/search' component={SearchForm} />
+          	<Route exact path='/' component={Home} />
+          	<Route exact path='/search' component={SearchForm} />
             <Route path='/cats' component={Cats} />
             <Route path='/dogs' component={Dogs} />
             <Route path='/computers' component={Computers} />
-            <Route path='search/:topic' component={SearchResults} />
-            <PicContainer data={SearchResults} />
+            <Route path='/search/:topic' component ={SearchResults} />
           </Switch>
         </div>
       </BrowserRouter>
