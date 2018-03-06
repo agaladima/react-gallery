@@ -19,6 +19,7 @@ import Dogs from './Components/Dogs';
 import Computers from './Components/Computers';
 import PicContainer from './Components/PicContainer';
 import PicList from './Components/PicList';
+import NoPage from './Components/NoPage';
 
 class App extends Component {
 
@@ -36,6 +37,7 @@ class App extends Component {
             <Route path='/dogs' component={Dogs} />
             <Route path='/computers' component={Computers} />
             <Route path='/search/:topic' component ={SearchResults} />
+            <NoPage />
           </Switch>
         </div>
       </BrowserRouter>
